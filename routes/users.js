@@ -28,7 +28,7 @@ router.get('/login', function(req, res, next) {
            if(res.length===0){
                //如果没有查询到结果，返回错误
                var resData={
-                   status:0,
+                   code:0,
                    msg:'CAN NOT FIND USERD OPENID',
                    data:data
                };
@@ -43,13 +43,13 @@ router.get('/login', function(req, res, next) {
                            if(err) throw err;
                            if(res.changedRows===1){
                                var resData={
-                                   status:200,
+                                   code:200,
                                    msg:'OK',
                                    data:data
                                };
                            }else{
                                var resData={
-                                   status:0,
+                                   code:0,
                                    msg:'LOGIN SUCCESS BUT FAILED TO UPDATE SESSION_KEY',
                                    data:data
                                };
@@ -73,7 +73,7 @@ router.get('/register',function (req,res,next) {
         connection.query("SELECT id,avatarUrl,avatarUrl FROM user WHERE openid = ?",[openid],function (err,res,field) {
            if(res.length>0){
                var resData={
-                   status:200,
+                   code:200,
                    msg:'OK',
                    data:res[0]
                };
@@ -88,7 +88,7 @@ router.get('/register',function (req,res,next) {
                        country:req.query.country,
                        province:req.query.province },function (err,res,field) {
                        var resData={
-                           status:200,
+                           code:200,
                            msg:'OK',
                            data:{id:res.insertId,
                                avatarUrl:req.query.avatarUrl,
