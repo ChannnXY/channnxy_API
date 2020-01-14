@@ -23,7 +23,7 @@ router.get('/getList', function(req, res, next) {
     });
 });
 
-router.get('/getItem',function (req,res,next) {
+router.get('/getItemIntro',function (req,res,next) {
     var _res = res;
     var response = {
         code:200,
@@ -58,6 +58,20 @@ router.get('/getItem',function (req,res,next) {
         }
         _res.send(response);
     });
+});
+
+router.get('/getProblem',function (req,res,next) {
+    var _res = res;
+    var response = {
+        code: 200,
+        msg: "OK",
+        data: []
+    };
+    connection.query('SELECT intro FROM project_problems WHERE project_id = ?',[req.query.req],function (err,res,field) {
+        for(var i in res){
+            response.data.push(res[i].intro)
+        }
+    })
 });
 
 module.exports = router;

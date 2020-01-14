@@ -9,6 +9,8 @@ var usersRouter = require('./routes/users');
 var contactRouter = require('./routes/contact');
 var projectRouter = require('./routes/project');
 var honorRouter = require('./routes/honor');
+var resumeRouter = require('./routes/resume');
+var competitionRouter = require('./routes/competition');
 
 var app = express();
 /*
@@ -38,6 +40,8 @@ app.use('/users', usersRouter);
 app.use('/contact', contactRouter);
 app.use('/project', projectRouter);
 app.use('/honor', honorRouter);
+app.use('/resume', resumeRouter);
+app.use('/competition', competitionRouter);
 app.use('/contact/input',function (req,res,next) {
     contactRouter.input(req,res,next)
 });
