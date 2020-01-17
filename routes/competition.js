@@ -19,7 +19,7 @@ router.get('/list',function (req,res,next) {
     };
     connection.query('SELECT * FROM competition',function (err,res,field) {
         if(err) throw err;
-        console.log(JSON.parse(JSON.stringify(res)));
+        // console.log(JSON.parse(JSON.stringify(res)));
         response.data = JSON.parse(JSON.stringify(res));
         _res.send(response);
     });
@@ -39,7 +39,12 @@ router.get('/getItem',function (req,res,next) {
                 connection.query('SELECT img_url FROM com_image where competition_id = ?',[req.query.id],function (err,res,field) {
                     if(err) throw err;
                     // console.log(JSON.parse(JSON.stringify(res)));
-                    response.data.img = JSON.parse(JSON.stringify(res));
+                    var data = JSON.parse(JSON.stringify(res));
+                    var imgArray=[];
+                    for(var i in data){
+                        imgArray.push(data[i].img_url);
+                    }
+                    response.data.img = imgArray;
             _res.send(response);
         });
     });
