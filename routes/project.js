@@ -71,7 +71,25 @@ router.get('/getProblem',function (req,res,next) {
         for(var i in res){
             response.data.push(res[i].intro)
         }
-    })
+        _res.send(response);
+    });
+});
+
+router.get('/getImage',function (req,res,next) {
+    var _res = res;
+    var response = {
+        code: 200,
+        msg: "OK",
+        data: []
+    };
+    connection.query('SELECT img FROM project_img WHERE project_id = ?',[req.query.id],function (err,res,field) {
+        if(err) throw err;
+        console.log(res);
+        for(var i in res){
+            response.data.push(res[i].img)
+        }
+        _res.send(response);
+    });
 });
 
 module.exports = router;
